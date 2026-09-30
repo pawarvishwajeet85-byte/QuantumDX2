@@ -1,0 +1,24 @@
+[project]
+name = "quantumdx-backend"
+version = "0.1.0"
+description = "QuantumDX backend (research prototype, not for clinical diagnosis)"
+requires-python = ">=3.11"
+# Versions intentionally unpinned here. Phase 0 records the verified set in
+# docs/adr/0001-stack-and-versions.md and a lockfile is generated from it.
+dependencies = [
+  "fastapi", "uvicorn", "pydantic", "pydantic-settings",
+  "sqlalchemy", "alembic", "psycopg[binary]", "argon2-cffi", "python-multipart",
+  "numpy", "pandas", "scikit-learn", "joblib", "pennylane",
+]
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "httpx", "ruff", "mypy", "bandit", "pip-audit"]
+xai = ["shap"]  # optional until compatibility is verified
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "S", "UP"]
+[tool.mypy]
+strict = true
